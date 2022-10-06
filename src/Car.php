@@ -7,7 +7,6 @@ class Car
     private float $fuelConsumption;
 
 
-
   public function __construct(
       int $odometer,
       string $number_plate,
