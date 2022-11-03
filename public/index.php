@@ -2,17 +2,13 @@
 
 declare(strict_types=1);
 
-require_once '../src/Car.php';
+spl_autoload_register(function ($class) {
+    require_once __DIR__ . '/../' . lcfirst(str_replace('\\', '/', $class)) . '.php';
+});
 
-// HW: Driver (name, surname, age)
+$transaction = new \App\Transaction(50);
 
+var_dump($transaction->getAmount());
 
-$car = (new Car(odometer: 1000,number_plate: 'LN-333',fuelConsumption: 14.5))
-    ->addKilometers(200)
-    ->addKilometers(500);
+$transaction->process();
 
-$liters = $car->getConsumedLiters();
-
-$car = null;
-
-var_dump($liters);
