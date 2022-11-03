@@ -21,5 +21,5 @@ class Transaction
     public function getAmount(): float
     {
         return $this->amount;
-        {}
+     }
 }
