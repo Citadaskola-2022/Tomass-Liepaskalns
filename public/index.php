@@ -2,17 +2,19 @@
 
 declare(strict_types=1);
 
-require_once '../src/Car.php';
-
-// HW: Driver (name, surname, age)
+require __DIR__ . '/../bootstrap/app.php';
 
 
-$car = (new Car(odometer: 1000,number_plate: 'LN-333',fuelConsumption: 14.5))
-    ->addKilometers(200)
-    ->addKilometers(500);
+$coffee = new \App\Cafe\CoffeeWithMilk();
 
-$liters = $car->getConsumedLiters();
+$iced = new \App\Cafe\IcedCoffee($coffee);
+$coffee->prepare(100);
+$coffee->addIce(5);
+$coffee->addIce(4);
+$coffee->brew();
 
-$car = null;
+var_dump($iced);
 
-var_dump($liters);
+}
+
+
