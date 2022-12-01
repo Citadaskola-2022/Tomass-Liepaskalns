@@ -2,17 +2,46 @@
 
 declare(strict_types=1);
 
-require_once '../src/Car.php';
+use Doctrine\Inflector\InflectorFactory;
+use Ramsey\Uuid\Uuid;
 
-// HW: Driver (name, surname, age)
+require __DIR__ . '/../bootstrap/app.php';
 
 
-$car = (new Car(odometer: 1000,number_plate: 'LN-333',fuelConsumption: 14.5))
-    ->addKilometers(200)
-    ->addKilometers(500);
+$transaction = new \App\Transaction(60);
+//$transaction->process();
+$dotenv = \Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
 
-$liters = $car->getConsumedLiters();
+echo '<pre>';
+var_dump($_ENV['DB_USER']);
+var_dump($_ENV[SECRET_KEY]);
 
-$car = null;
 
-var_dump($liters);
+$inflector = InflectorFactory::create()->build();
+
+$name = 'comment';
+printf(
+    'vienskaitlis: %s, daudzskaitlis: %s',
+    $name, $inflector->pluralize($name)
+);
+echo '<br>';
+
+$blogPost = 'This is My Blog post';
+printf(
+    'title: %s, url: %s',
+    $blogPost, $inflector->urlize($name)
+);
+echo '<br>';
+
+
+
+
+$uuid = Uucompoid::uuid4();
+
+printf(
+    "UUID: %s\nVersion: %d\n",
+    $uuid->toString(),
+    $uuid->getFields()->getVersion()
+);
+
