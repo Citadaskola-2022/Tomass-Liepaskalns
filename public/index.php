@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 require __DIR__ . '/../bootstrap/app.php';
 
-$coffee = new \App\Cafe\CoffeeWithMilk();
+/** @var \App\Form\Field[] $fields */
+$fields = [new \App\Form\Text('text_field'),
+    new \App\Form\Checkbox('checkbox_field'),
+    new \App\Form\Radio('radio_field'),
+];
 
-$iced = new \App\Cafe\IcedCoffee($coffee);
-$coffee->prepare(100);
-$coffee->addIce(5);
-$coffee->addIce(4);
-$coffee->brew();
-
-var_dump($iced);
-
+foreach ($fields as $field){
+    echo $field->render();
 }
+
