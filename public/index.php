@@ -2,46 +2,16 @@
 
 declare(strict_types=1);
 
-use Doctrine\Inflector\InflectorFactory;
-use Ramsey\Uuid\Uuid;
-
 require __DIR__ . '/../bootstrap/app.php';
 
+$coffee = new \App\Cafe\CoffeeWithMilk();
 
-$transaction = new \App\Transaction(60);
-//$transaction->process();
-$dotenv = \Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
-$dotenv->load();
+$iced = new \App\Cafe\IcedCoffee($coffee);
+$coffee->prepare(100);
+$coffee->addIce(5);
+$coffee->addIce(4);
+$coffee->brew();
 
-echo '<pre>';
-var_dump($_ENV['DB_USER']);
-var_dump($_ENV[SECRET_KEY]);
+var_dump($iced);
 
-
-$inflector = InflectorFactory::create()->build();
-
-$name = 'comment';
-printf(
-    'vienskaitlis: %s, daudzskaitlis: %s',
-    $name, $inflector->pluralize($name)
-);
-echo '<br>';
-
-$blogPost = 'This is My Blog post';
-printf(
-    'title: %s, url: %s',
-    $blogPost, $inflector->urlize($name)
-);
-echo '<br>';
-
-
-
-
-$uuid = Uucompoid::uuid4();
-
-printf(
-    "UUID: %s\nVersion: %d\n",
-    $uuid->toString(),
-    $uuid->getFields()->getVersion()
-);
-
+}
